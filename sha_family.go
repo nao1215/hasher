@@ -15,6 +15,7 @@ type shaHasher struct {
 }
 
 // GenHashFromString generates a hash from a string using the specified hash function.
+// Supported hash functions: SHA-1, SHA-256, SHA-512.
 func (s *shaHasher) GenHashFromString(str string) ([]byte, error) {
 	h := s.HashFunc()
 	if _, err := h.Write([]byte(str)); err != nil {
@@ -24,6 +25,7 @@ func (s *shaHasher) GenHashFromString(str string) ([]byte, error) {
 }
 
 // GenHashFromIOReader generates a hash from an io.Reader using the specified hash function.
+// Supported hash functions: SHA-1, SHA-256, SHA-512.
 func (s *shaHasher) GenHashFromIOReader(r io.Reader) ([]byte, error) {
 	h := s.HashFunc()
 	if _, err := io.Copy(h, r); err != nil {
@@ -46,6 +48,7 @@ func (s *shaHasher) CmpHashAndString(hashA []byte, str string) error {
 }
 
 // CmpHashAndIOReader compares a hash and an io.Reader using the specified hash function.
+// Supported hash functions: SHA-1, SHA-256, SHA-512.
 func (s *shaHasher) CmpHashAndIOReader(hashA []byte, r io.Reader) error {
 	hashB, err := s.GenHashFromIOReader(r)
 	if err != nil {

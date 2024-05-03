@@ -108,6 +108,22 @@ func TestHash_Generate(t *testing.T) {
 			expected:    "9e7021341882d2a4cae911cf08b0312a10c8edff7aa279adb43b2c2646bece9281da78e2d6e84c048b9ff70730990bfd201240c18b6e053b2027605690671418",
 			expectedErr: nil,
 		},
+		{
+			name:        "Failed to generate perceptual hash from string",
+			input:       "test",
+			isFile:      false,
+			opts:        []Option{WithPhash()},
+			expected:    "",
+			expectedErr: ErrPhashNotSupportedString,
+		},
+		{
+			name:        "Generate perceptual hash from io.Reader",
+			input:       filepath.Join("testdata", "test.jpg"),
+			isFile:      true,
+			opts:        []Option{WithPhash()},
+			expected:    "6917092734e3ec3a",
+			expectedErr: nil,
+		},
 	}
 
 	for _, tt := range tests {
@@ -268,6 +284,22 @@ func TestHash_Compare(t *testing.T) {
 			input:       filepath.Join("testdata", "test.txt"),
 			isFile:      true,
 			opts:        []Option{WithSha512sum()},
+			expectedErr: nil,
+		},
+		{
+			name:        "Failed to compare perceptual hash and string",
+			hash:        "6917092734e3ec3a",
+			input:       "test",
+			isFile:      false,
+			opts:        []Option{WithPhash()},
+			expectedErr: ErrPhashNotSupportedString,
+		},
+		{
+			name:        "Compare perceptual hash and io.Reader",
+			hash:        "6917092734e3ec3a",
+			input:       filepath.Join("testdata", "test.jpg"),
+			isFile:      true,
+			opts:        []Option{WithPhash()},
 			expectedErr: nil,
 		},
 	}

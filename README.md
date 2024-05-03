@@ -13,6 +13,7 @@ The `hasher` is cross-platform and has been tested on Windows, macOS, and Linux.
 - SHA1
 - SHA256
 - SHA512
+- Perceptual Hash (only for images) 
 - User-defined algorithms
 - go version 1.20 or later
 
