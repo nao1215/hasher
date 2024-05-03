@@ -50,7 +50,9 @@
 package hasher
 
 import (
+	"bytes"
 	"fmt"
+	"hash"
 	"io"
 )
 
@@ -100,4 +102,56 @@ func (h *Hash) Compare(hash []byte, input any) error {
 	default:
 		return fmt.Errorf("%w: %T", ErrUnsupportedInputType, v)
 	}
+}
+
+// hasher represents a generic hasher for implementing hash.Hash interface.
+type hasher struct {
+	HashFunc func() hash.Hash
+}
+
+// GenHashFromString generates a hash from a string using the specified hash function.
+// Supported hash functions: SHA-1, SHA-256, SHA-512.
+func (s *hasher) GenHashFromString(str string) ([]byte, error) {
+	h := s.HashFunc()
+	if _, err := h.Write([]byte(str)); err != nil {
+		return nil, err
+	}
+	return h.Sum(nil), nil
+}
+
+// GenHashFromIOReader generates a hash from an io.Reader using the specified hash function.
+// Supported hash functions: SHA-1, SHA-256, SHA-512.
+func (s *hasher) GenHashFromIOReader(r io.Reader) ([]byte, error) {
+	h := s.HashFunc()
+	if _, err := io.Copy(h, r); err != nil {
+		return nil, err
+	}
+	return h.Sum(nil), nil
+}
+
+// CmpHashAndString compares a hash and a string using the specified hash function.
+func (s *hasher) CmpHashAndString(hashA []byte, str string) error {
+	hashB, err := s.GenHashFromString(str)
+	if err != nil {
+		return err
+	}
+
+	if !bytes.Equal(hashA, hashB) {
+		return ErrHashMismatch
+	}
+	return nil
+}
+
+// CmpHashAndIOReader compares a hash and an io.Reader using the specified hash function.
+// Supported hash functions: SHA-1, SHA-256, SHA-512.
+func (s *hasher) CmpHashAndIOReader(hashA []byte, r io.Reader) error {
+	hashB, err := s.GenHashFromIOReader(r)
+	if err != nil {
+		return err
+	}
+
+	if !bytes.Equal(hashA, hashB) {
+		return ErrHashMismatch
+	}
+	return nil
 }
