@@ -2,6 +2,8 @@
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
+[![Multi OS Unit Test](https://github.com/nao1215/hasher/actions/workflows/unit_test.yml/badge.svg)](https://github.com/nao1215/hasher/actions/workflows/unit_test.yml)
+[![reviewdog](https://github.com/nao1215/hasher/actions/workflows/reviewdog.yml/badge.svg)](https://github.com/nao1215/hasher/actions/workflows/reviewdog.yml)
 
 The `hasher` package operates on different hash algorithms through a unified interface. The interfaces it provides include "hash generation" and "comparison of hash values with files (or strings)."
 
@@ -13,25 +15,9 @@ The `hasher` is cross-platform and has been tested on Windows, macOS, and Linux.
 - SHA1
 - SHA256
 - SHA512
+- Perceptual Hash (only for images) 
 - User-defined algorithms
 - go version 1.20 or later
-
-If you use a user-defined algorithm, you must implement the `Hasher` interface.
-```go
-// Hasher is an interface that contains the methods to generate and compare hashes.
-type Hasher interface {
-	// GenHashFromString generates a hash from a string.
-	GenHashFromString(string) ([]byte, error)
-	// GenHashFromIOReader generates a hash from an io.Reader.
-	GenHashFromIOReader(io.Reader) ([]byte, error)
-	// CmpHashAndString compares a hash and a string.
-	// If the hash and the string are the same, nil is returned.
-	CmpHashAndString([]byte, string) error
-	// CmpHashAndIOReader compares a hash and an io.Reader.
-	// If the hash and the io.Reader are the same, nil is returned.
-	CmpHashAndIOReader([]byte, io.Reader) error
-}
-```
 
 ## Usage
 
@@ -94,6 +80,31 @@ If you use another algorithm, you can specify algorithm option when creating a n
 
 ```go
     h := hasher.NewHash(hasher.WithSha256sum())
+```
+
+### Use user-defined algorithm
+
+If you use a user-defined algorithm, you must implement the `Hasher` interface.
+
+```go
+// Hasher is an interface that contains the methods to generate and compare hashes.
+type Hasher interface {
+	// GenHashFromString generates a hash from a string.
+	GenHashFromString(string) ([]byte, error)
+	// GenHashFromIOReader generates a hash from an io.Reader.
+	GenHashFromIOReader(io.Reader) ([]byte, error)
+	// CmpHashAndString compares a hash and a string.
+	// If the hash and the string are the same, nil is returned.
+	CmpHashAndString([]byte, string) error
+	// CmpHashAndIOReader compares a hash and an io.Reader.
+	// If the hash and the io.Reader are the same, nil is returned.
+	CmpHashAndIOReader([]byte, io.Reader) error
+}
+```
+
+```go
+	// YourOriginalHashAlgorithm implements the Hasher interface.
+	h := hasher.NewHash(hasher.WithUserDifinedAlgorithm(YourOriginalHashAlgorithm))
 ```
 
 ## LICENSE

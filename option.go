@@ -37,3 +37,10 @@ func WithSha512sum() Option {
 		h.hasher = newSHA512Hasher()
 	}
 }
+
+// WithPhash is an option that sets the hash algorithm to Perceptual Hash.
+func WithPhash() Option {
+	return func(h *Hash) {
+		h.hasher = &pHasher{}
+	}
+}
