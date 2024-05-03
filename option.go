@@ -86,3 +86,10 @@ func WithFnv128asum() Option {
 		h.hasher = newFnv128aHasher()
 	}
 }
+
+// WithBlake3sum is an option that sets the hash algorithm to Blake3.
+func WithBlake3sum() Option {
+	return func(h *Hash) {
+		h.hasher = &blake3Hasher{}
+	}
+}

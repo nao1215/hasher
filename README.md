@@ -18,6 +18,7 @@ The `hasher` is cross-platform and has been tested on Windows, macOS, and Linux.
 - 32-bit FNV-1, FNV-1a
 - 64-bit FNV-1, FNV-1a
 - 128-bit FNV-1, FNV-1a
+- Blake3(64bit)
 - Perceptual Hash (only for images) 
 - User-defined algorithms
 

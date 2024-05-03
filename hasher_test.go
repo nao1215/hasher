@@ -220,6 +220,22 @@ func TestHash_Generate(t *testing.T) {
 			expected:    "2736af9add0bf02253c1651da64b19a6",
 			expectedErr: nil,
 		},
+		{
+			name:        "Generate blake3 from string",
+			input:       "test",
+			isFile:      false,
+			opts:        []Option{WithBlake3sum()},
+			expected:    "4878ca0425c739fa427f7eda20fe845f6b2e46ba5fe2a14df5b1e32f50603215c82f77a5bd07f7048a95a699e056d0e32bd2bdadc37ee096719c3d9ec12f29a6",
+			expectedErr: nil,
+		},
+		{
+			name:        "Generate blake3 from io.Reader",
+			input:       filepath.Join("testdata", "test.txt"),
+			isFile:      true,
+			opts:        []Option{WithBlake3sum()},
+			expected:    "a1b692dcd30210a76e8d24cb593a0b2f8d307dbe4dfdefd7053f725d6b996fe9ee2ea450c9c9afa2f654640ec4cf113c3420d2f3b71edd7c55ca11d918d1af2b",
+			expectedErr: nil,
+		},
 	}
 
 	for _, tt := range tests {
@@ -492,6 +508,22 @@ func TestHash_Compare(t *testing.T) {
 			input:       filepath.Join("testdata", "test.txt"),
 			isFile:      true,
 			opts:        []Option{WithFnv128asum()},
+			expectedErr: nil,
+		},
+		{
+			name:        "Compare blake3 hash and string",
+			hash:        "4878ca0425c739fa427f7eda20fe845f6b2e46ba5fe2a14df5b1e32f50603215c82f77a5bd07f7048a95a699e056d0e32bd2bdadc37ee096719c3d9ec12f29a6",
+			input:       "test",
+			isFile:      false,
+			opts:        []Option{WithBlake3sum()},
+			expectedErr: nil,
+		},
+		{
+			name:        "Compare blake3 hash and io.Reader",
+			hash:        "a1b692dcd30210a76e8d24cb593a0b2f8d307dbe4dfdefd7053f725d6b996fe9ee2ea450c9c9afa2f654640ec4cf113c3420d2f3b71edd7c55ca11d918d1af2b",
+			input:       filepath.Join("testdata", "test.txt"),
+			isFile:      true,
+			opts:        []Option{WithBlake3sum()},
 			expectedErr: nil,
 		},
 	}
