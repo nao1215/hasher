@@ -4,6 +4,9 @@ go 1.20
 
 require (
 	github.com/azr/phash v0.2.0
+	github.com/cespare/xxhash v1.1.0
+	github.com/jzelinskie/whirlpool v0.0.0-20201016144138-0675e54bb004
+	github.com/reusee/mmh3 v0.0.0-20140820141314-64b85163255b
 	lukechampine.com/blake3 v1.3.0
 )
 
