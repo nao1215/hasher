@@ -44,3 +44,45 @@ func WithPhash() Option {
 		h.hasher = &pHasher{}
 	}
 }
+
+// WithFnv32sum is an option that sets the hash algorithm to FNV-32.
+func WithFnv32sum() Option {
+	return func(h *Hash) {
+		h.hasher = &fnv32Hasher{}
+	}
+}
+
+// WithFnv32asum is an option that sets the hash algorithm to FNV-32a.
+func WithFnv32asum() Option {
+	return func(h *Hash) {
+		h.hasher = &fnv32aHasher{}
+	}
+}
+
+// WithFnv64sum is an option that sets the hash algorithm to FNV-64.
+func WithFnv64sum() Option {
+	return func(h *Hash) {
+		h.hasher = &fnv64Hasher{}
+	}
+}
+
+// WithFnv64asum is an option that sets the hash algorithm to FNV-64a.
+func WithFnv64asum() Option {
+	return func(h *Hash) {
+		h.hasher = &fnv64aHasher{}
+	}
+}
+
+// WithFnv128sum is an option that sets the hash algorithm to FNV-128.
+func WithFnv128sum() Option {
+	return func(h *Hash) {
+		h.hasher = newFnv128Hasher()
+	}
+}
+
+// WithFnv128asum is an option that sets the hash algorithm to FNV-128a.
+func WithFnv128asum() Option {
+	return func(h *Hash) {
+		h.hasher = newFnv128aHasher()
+	}
+}
