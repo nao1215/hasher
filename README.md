@@ -12,6 +12,7 @@ The `hasher` is cross-platform and has been tested on Windows, macOS, and Linux.
 ### Supported Hash Algorithms
 
 - MD5
+- CRC32
 - SHA1
 - SHA256
 - SHA512
@@ -19,6 +20,9 @@ The `hasher` is cross-platform and has been tested on Windows, macOS, and Linux.
 - 64-bit FNV-1, FNV-1a
 - 128-bit FNV-1, FNV-1a
 - Blake3(64bit)
+- MurmurHash v3
+- Whirlpool
+- xxHash
 - Perceptual Hash (only for images) 
 - User-defined algorithms
 
