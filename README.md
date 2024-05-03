@@ -2,6 +2,7 @@
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
+![Coverage](https://raw.githubusercontent.com/nao1215/octocovs-central-repo/main/badges/nao1215/hasher/coverage.svg)
 [![Multi OS Unit Test](https://github.com/nao1215/hasher/actions/workflows/unit_test.yml/badge.svg)](https://github.com/nao1215/hasher/actions/workflows/unit_test.yml)
 [![reviewdog](https://github.com/nao1215/hasher/actions/workflows/reviewdog.yml/badge.svg)](https://github.com/nao1215/hasher/actions/workflows/reviewdog.yml)
 
