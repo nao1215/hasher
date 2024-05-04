@@ -5,6 +5,8 @@
 ![Coverage](https://raw.githubusercontent.com/nao1215/octocovs-central-repo/main/badges/nao1215/hasher/coverage.svg)
 [![Multi OS Unit Test](https://github.com/nao1215/hasher/actions/workflows/unit_test.yml/badge.svg)](https://github.com/nao1215/hasher/actions/workflows/unit_test.yml)
 [![reviewdog](https://github.com/nao1215/hasher/actions/workflows/reviewdog.yml/badge.svg)](https://github.com/nao1215/hasher/actions/workflows/reviewdog.yml)
+[![Go Reference](https://pkg.go.dev/badge/github.com/nao1215/hasher.svg)](https://pkg.go.dev/github.com/nao1215/hasher)
+[![Go Report Card](https://goreportcard.com/badge/github.com/nao1215/hasher)](https://goreportcard.com/report/github.com/nao1215/hasher)
 
 The `hasher` package operates on different hash algorithms through a unified interface. The interfaces it provides include "hash generation" and "comparison of hash values with files (or strings)."
 
